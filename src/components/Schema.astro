@@ -1,14 +1,83 @@
 ---
+// src/components/Schema.astro
 interface Props {
-  type: 'Product' | 'Organization' | 'Breadcrumb';
-  data: any;
+  type?: 'Organization' | 'FAQPage' | 'BreadcrumbList' | 'BlogPosting' | 'Product';
+  data?: any;
+  faqData?: any;
+  breadcrumbItems?: Array<{ name: string; url: string }>;
 }
 
-const { type, data } = Astro.props;
+const { type = 'Organization', data = {}, faqData, breadcrumbItems = [] } = Astro.props;
 
-let schema = {};
+let schema: any = {};
 
-if (type === 'Product') {
+if (type === 'Organization') {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "VerifiedPropFirm",
+    "url": "https://verifiedpropfirm.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://verifiedpropfirm.com/images/logo.webp"
+    },
+    "sameAs": [
+      "https://twitter.com/verifiedpropfirm"
+    ],
+    "description": "Expert reviews and verified discounts for broker-backed prop trading firms. Real capital testing and payout verification."
+  };
+}
+
+if (type === 'FAQPage' && faqData) {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData
+  };
+}
+
+if (type === 'BreadcrumbList' && breadcrumbItems.length > 0) {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": `https://verifiedpropfirm.com${item.url}`
+    }))
+  };
+}
+
+if (type === 'BlogPosting' && data) {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": data.url
+    },
+    "headline": data.title,
+    "image": data.image,
+    "author": {
+      "@type": "Person",
+      "name": data.author || "David Fox",
+      "url": "https://verifiedpropfirm.com/about/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "VerifiedPropFirm",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://verifiedpropfirm.com/images/logo.webp"
+      }
+    },
+    "datePublished": data.datePublished,
+    "dateModified": data.dateModified || data.datePublished
+  };
+}
+
+if (type === 'Product' && data) {
   schema = {
     "@context": "https://schema.org/",
     "@type": "Product",
@@ -38,18 +107,6 @@ if (type === 'Product') {
         "name": data.firmName
       }
     }
-  };
-} else if (type === 'Organization') {
-  schema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "VerifiedPropFirm",
-    "url": "https://verifiedpropfirm.com",
-    "logo": "https://verifiedpropfirm.com/images/logo.webp",
-    "sameAs": [
-      "https://twitter.com/verifiedpropfirm",
-      "https://facebook.com/verifiedpropfirm"
-    ]
   };
 }
 ---
