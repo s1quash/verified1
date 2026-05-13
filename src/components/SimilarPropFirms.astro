@@ -1,0 +1,71 @@
+---
+// src/components/SimilarPropFirms.astro
+// Beautiful similar prop firms recommendations
+
+import { propFirms } from '../data/firms.js';
+
+interface Props {
+  currentSlug: string;
+  currentFirm: any;
+  limit?: number;
+}
+
+const { currentSlug, currentFirm, limit = 3 } = Astro.props;
+
+// Simple similarity logic based on shared attributes
+const similarFirms = propFirms
+  .filter(f => f.type === 'prop' && f.slug !== currentSlug)
+  .filter(f => {
+    // Prioritize same US status or similar drawdown style if available
+    const sameUS = f.usTraders === currentFirm.usTraders;
+    return sameUS;
+  })
+  .sort(() => 0.5 - Math.random())
+  .slice(0, limit);
+
+// Fallback if not enough matches
+const finalSimilar = similarFirms.length >= 2 
+  ? similarFirms 
+  : propFirms.filter(f => f.type === 'prop' && f.slug !== currentSlug).slice(0, limit);
+---
+
+{finalSimilar.length > 0 && (
+  <section class="mt-16 pt-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h2 class="text-3xl font-bold tracking-tight">Firms Like {currentFirm.name}</h2>
+        <p class="text-slate-400 mt-1">Explore similar broker-backed prop firms our traders also recommend</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {finalSimilar.map((firm) => (
+          <a 
+            href={`/prop-firms/${firm.slug}/`}
+            class="group block bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 transition-all hover:-translate-y-0.5"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <div class="font-bold text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors">{firm.name}</div>
+                <div class="text-xs text-slate-500 mt-0.5">{firm.propYear || 'Est.'} • {firm.platforms?.slice(0,2).join(' • ')}</div>
+              </div>
+              {firm.trustpilot && (
+                <div class="text-right">
+                  <div class="text-emerald-400 text-sm font-bold">★ {firm.trustpilot}</div>
+                </div>
+              )}
+            </div>
+
+            <p class="text-slate-400 text-sm line-clamp-3 mb-5">
+              {firm.description?.substring(0, 140)}...
+            </p>
+
+            <div class="inline-flex items-center text-sm font-bold text-emerald-400 group-hover:gap-1.5 transition-all">
+              View review
+              <span aria-hidden="true" class="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
