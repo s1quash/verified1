@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import failuresfx from '../assets/images/failuresfx.webp';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { currentMonthYear } from '../utils/dateUtils.js';
+
+const verificationSteps = [
+  {
+    title: "Manual Code Testing",
+    description: "Every discount code is manually applied to a checkout page every 24 hours. We don't just guess; we verify.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>`
+  },
+  {
+    title: "Broker Verification",
+    description: "We audit the partnership between the prop firm and their broker to ensure genuine liquidity and payout consistency.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+  },
+  {
+    title: "Community Feedback",
+    description: "We monitor Trustpilot and community forums for any signs of delayed payouts or unfair rule changes.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+  }
+];
+
+// Configuration: This points to your founder image in public/images/
+const founderImage = "/images/failuresfx.webp";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph":[
+    {
+      "@type": "Organization",
+      "@id": "https://verifiedpropfirm.com/#organization",
+      "name": "VerifiedPropFirm",
+      "url": "https://verifiedpropfirm.com",
+      "logo": "https://verifiedpropfirm.com/images/logo.png"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://verifiedpropfirm.com/about/#person",
+      "name": "David Fox",
+      "alternateName": "FailuresFX",
+      "jobTitle": "Founder & Trader",
+      "worksFor": {"@id": "https://verifiedpropfirm.com/#organization"},
+      "url": "https://verifiedpropfirm.com/about/",
+      "sameAs":[
+        "https://www.quora.com/profile/David-Fox-413",
+        "https://www.forexfactory.com/failuresfx",
+        "https://twitter.com/verifiedpropfirm"
+      ],
+      "description": "A verified trader and MQL5 algorithmic developer specializing in broker-backed prop firms."
+    }
+  ]
+};
+---
+
+<Layout 
+  title="About Us | David Fox: The Trader Behind VerifiedPropFirm" 
+  description="Meet David Fox (FailuresFX), the trader and MQL5 developer behind VerifiedPropFirm. Discover why we only recommend broker-backed prop firms."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <div class="min-h-screen bg-slate-950 text-slate-50 font-sans">
+    <Header />
+
+    <main>
+      <!-- Meet the Founder Hero Section -->
+      <section class="relative pt-32 pb-20 overflow-hidden border-b border-slate-900">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="lg:w-3/5 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6 border border-blue-500/20">
+                🚀 The Verified Mission
+              </div>
+              <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
+                Beyond the Screen: The Trader Behind <span class="text-gradient">VerifiedPropFirm</span>
+              </h1>
+              <p class="text-xl text-slate-300 leading-relaxed mb-8 max-w-3xl">
+                The proprietary trading industry is booming, but it has a massive problem: 90% of prop firm review sites are run by marketers who have never placed a single live trade. They copy-paste rules and push fake discount codes just to earn a commission. I built VerifiedPropFirm.com to change that.
+              </p>
+            </div>
+            <div class="lg:w-2/5 flex flex-col items-center">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl">
+                  <Image 
+                    src={failuresfx} 
+                    alt="David Fox (FailuresFX) - Founder of VerifiedPropFirm" 
+                    width={400}
+                    height={400}
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+              </div>
+              <p class="mt-6 text-slate-400 font-bold tracking-widest uppercase text-xs">David Fox (FailuresFX) - Trader & Founder</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main SEO Content Section -->
+      <section class="py-24 bg-slate-900/20 border-t border-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <article class="prose prose-invert prose-blue max-w-none">
+            <h2 class="text-3xl font-bold text-white mb-8">Who Am I? (The "FailuresFX" Story)</h2>
+            <div class="text-slate-300 leading-relaxed text-lg space-y-6 mb-12">
+              <p>
+                I go with the username <strong>failuresfx</strong> in the trading community. Over the last 5 years, I have continuously failed. There were some brief moments where I thought I had finally made it, only for market conditions to change, causing me to risk too much and blow my account.
+              </p>
+              <p>
+                It has happened many times. The reality was that the "edge" I thought I had was just too flimsy. It was a mirage. I simply had not done enough backtesting even though at the time, I thought I had. I learned the hard way that if a system cannot succeed across many different market conditions, it will not do you any good in the long term.
+              </p>
+              <p>
+                Today, I move much slower. When verifying the edge of a system, I backtest more and risk small percentages at first to avoid losing my hard earned capital.
+              </p>
+              <p>
+                Despite failing so many times, I never gave up. Recently, I finally transitioned from a struggling, system-hopping retail trader into a <strong>profitable trader</strong>. Now my trades are fully defined and I have reduced the "what ifs" to be extremely minimal. 
+              </p>
+              <p>
+                It is kind of robotic now with minimal discretion. As a result of the rules I made, I am forced to only take good probability trades. I originally taught myself MQL5 to remove human emotion and automate my trades, and while I still trade manually, that algorithmic mindset is what finally made me profitable.
+              </p>
+              <p class="bg-blue-600/10 border-l-4 border-blue-600 p-6 italic rounded-r-xl">
+                I've built several custom tools and EAs to help maintain this discipline. <a href="/#bonus" class="text-blue-400 hover:underline font-bold">You can claim my free MT5 tool suite here</a>.
+              </p>
+              <p class="text-slate-400 text-sm mt-4 italic">
+                I've been actively helping traders avoid scams and learn systematic trading for nearly a decade. You can read my extensive trading answers and community contributions on <a href="https://www.quora.com/profile/David-Fox-413" class="text-blue-400 hover:underline">Quora</a>.
+              </p>
+            </div>
+
+            <h2 class="text-3xl font-bold text-white mb-8">Why I Only Recommend Broker-Backed Firms</h2>
+            <p class="text-slate-300 leading-relaxed text-lg mb-8">
+              After passing several evaluations, I learned a hard lesson: passing a challenge doesn't mean you'll get paid. I had multiple unregulated prop firms deny my payouts based on hidden "consistency rules" or IP tracking excuses.
+            </p>
+            <p class="text-slate-300 leading-relaxed text-lg mb-12">
+              That frustration is why VerifiedPropFirm.com exists today. I personally audit every proprietary trading firm featured on this site. My rule is simple: a firm must prove they have genuine, verifiable liquidity through a highly regulated broker (such as FXPIG, Blueberry Markets, DNA Markets, or Darwinex). If they operate in the shadows, they don't get listed. We only feature platforms backed by transparent brokers or legacy firms with a multi-year, flawless track record of trader payouts.
+            </p>
+
+            <h2 class="text-3xl font-bold text-white mb-8">How We Maintain Trust & Transparency</h2>
+            <div class="space-y-8">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-2">Verified Discounts</h3>
+                  <p class="text-slate-400 leading-relaxed">On the site, you'll find actual screenshots proving that every code works at checkout.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-2">Tested Codes</h3>
+                  <p class="text-slate-400 leading-relaxed">Most of the codes here are permanent partner discount codes. If a temporary code expires, it is removed immediately.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-2">Affiliate Honesty</h3>
+                  <p class="text-slate-400 leading-relaxed">Yes, this site uses affiliate links to keep the lights on, but my loyalty is to the trader, not the firm. If a firm has 1 star on trustpilot then it will have 1 star on this site.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Values Grid (Retained) -->
+      <section class="py-24 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-white mb-4">Our Verification Standards</h2>
+            <p class="text-slate-400">How we ensure every recommendation on this site is trader-safe.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {verificationSteps.map(step => (
+              <div class="bg-slate-950 border border-slate-800 p-8 rounded-3xl shadow-xl hover:border-blue-500/30 transition-all group">
+                <div class="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 border border-slate-800 group-hover:scale-110 transition-transform shadow-inner" set:html={step.icon} />
+                <h3 class="text-2xl font-bold mb-4 text-white">{step.title}</h3>
+                <p class="text-slate-400 leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,391 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import failuresfx from '../../assets/images/failuresfx.webp';
+import FirmCard from '../../components/FirmCard.jsx';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { propFirms } from '../../data/firms.js';
+// Trigger re-render
+import { currentYear } from '../../utils/dateUtils.js';
+import Header from '../../components/Header.astro';
+// Re-render trigger
+import Footer from '../../components/Footer.astro';
+// Re-render trigger 2
+import CheckoutCTA from '../../components/CheckoutCTA.jsx';
+
+export function getStaticPaths() {
+  // Only prop firms here, no retail brokers
+  return propFirms.filter(f => f.type !== 'broker').map((firm) => ({
+    params: { slug: firm.slug },
+    props: { firm },
+  }));
+}
+
+const { firm } = Astro.props;
+
+const pageTitle = `${firm.name} Discount Code & Review (Verified ${currentYear})`;
+const pageDescription = firm.description;
+
+const breadcrumbItems = [
+  { name: 'Prop Firm Coupons', url: '/#compare' },
+  { name: `${firm.name} Discount`, url: `/prop-firms/${firm.slug}/` },
+];
+
+const schema = {
+  '@context': 'https://schema.org/',
+  '@type': 'Review',
+  'itemReviewed': {
+    '@type': 'SoftwareApplication',
+    'name': firm.name,
+    'image': `https://verifiedpropfirm.com${firm.image}`,
+    'description': firm.description,
+    'applicationCategory': 'FinanceApplication',
+    'operatingSystem': 'Web, iOS, Android, Windows',
+    'offers': {
+      '@type': 'Offer',
+      'price': firm.price,
+      'priceCurrency': firm.currency,
+    },
+    ...(!firm.skipAggregateRating ? {
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': firm.trustpilot,
+        'reviewCount': firm.trustpilotCount || '1000',
+      },
+    } : {}),
+  },
+  'author': {
+    '@type': 'Person',
+    'name': 'David Fox',
+    'url': 'https://verifiedpropfirm.com/about/'
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'VerifiedPropFirm',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://verifiedpropfirm.com/images/logo.png'
+    }
+  },
+  'reviewRating': {
+    '@type': 'Rating',
+    'ratingValue': firm.trustpilot,
+    'bestRating': '5',
+  },
+  'datePublished': '2026-01-01',
+  'dateModified': new Date().toISOString().split('T')[0],
+  ...(firm.slug === 'fxify' ? {
+    "positiveNotes": {
+      "@type": "ItemList",
+      "itemListElement":[
+        { "@type": "ListItem", "position": 1, "name": "First payout available on-demand" },
+        { "@type": "ListItem", "position": 2, "name": "True 8% Static Drawdown option" },
+        { "@type": "ListItem", "position": 3, "name": "Backed by institutional broker FXPIG" }
+      ]
+    },
+    "negativeNotes": {
+      "@type": "ItemList",
+      "itemListElement":[
+        { "@type": "ListItem", "position": 1, "name": "$4,000 daily profit cap on the Pro Account" },
+        { "@type": "ListItem", "position": 2, "name": "Trailing drawdown on the 1-Step Lightning challenge" }
+      ]
+    }
+  } : {})
+};
+
+// SSG Date Generation for SEO Freshness
+const today = new Date();
+const isoDate = today.toISOString().split('T')[0];
+const shortFormattedDate = today.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+});
+
+const isRestricted = firm.usTraders?.toLowerCase().includes('restricted');
+
+// Configuration for FXIFY review images
+const fxifyReviewImages = {
+  dashboard: "/images/reviews/fxify-dashboard-proof.png",
+  accounts: "/images/reviews/fxify-account-types.png",
+  payout: "/images/reviews/fxify-payout-proof.png",
+};
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <div class="min-h-screen">
+    <Header />
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {firm.slug === 'fxify' && (
+        <div class="mb-8 bg-blue-600/10 border border-blue-500/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center text-2xl">🇺🇸</div>
+            <div>
+              <h3 class="text-white font-bold text-sm">Special Report: Trading in the USA {currentYear}</h3>
+              <p class="text-slate-400 text-xs">Discover why FXIFY is our #1 pick for American traders in the new regulatory climate.</p>
+            </div>
+          </div>
+          <a href="/best-prop-firms-united-states-2026/" class="whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/20">
+            Read US Report →
+          </a>
+        </div>
+      )}
+
+      {firm.slug === 'darwinex-zero' && (
+        <div class="mb-12 relative overflow-hidden group">
+          <div class="absolute inset-0 bg-slate-900 rounded-3xl border border-slate-800 shadow-2xl"></div>
+          <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+          
+          <div class="relative p-8 flex flex-col md:flex-row items-center gap-8 border border-slate-800 rounded-3xl">
+            <div class="flex-shrink-0 relative">
+              <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center border border-slate-700 shadow-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7"/><path d="M9 7v1a3 3 0 0 0 6 0V7"/><path d="M15 7v1a3 3 0 0 0 6 0V7"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><path d="M9 7h6"/><path d="M12 3v4"/></svg>
+              </div>
+              <div class="absolute -bottom-2 -right-2 bg-emerald-500 rounded-full p-1.5 border-4 border-slate-900 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+            </div>
+            
+            <div class="flex-grow text-center md:text-left">
+              <div class="flex flex-wrap justify-center md:justify-start items-center gap-3 mb-2">
+                <span class="text-blue-500 font-black text-xs uppercase tracking-[0.2em]">Institutional Verification</span>
+                <span class="px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold">FCA Regulated: FRN 586466</span>
+              </div>
+              <h2 class="text-2xl font-bold text-white mb-2">Tradeslide Technologies Ltd</h2>
+              <p class="text-slate-400 text-sm leading-relaxed max-w-xl">
+                Darwinex Zero is the only prop model backed by a 100% FCA-regulated UK broker. With over <span class="text-white font-bold">$140M+ in Assets Under Management</span>, they provide the regulatory safety and institutional depth required for professional asset management.
+              </p>
+            </div>
+            
+            <div class="flex-shrink-0 w-full md:w-auto">
+              <div class="bg-slate-950/50 rounded-2xl border border-slate-800 p-4 text-center">
+                <div class="text-3xl font-black text-white mb-1">$140M+</div>
+                <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Total Seed AUM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Trust Signal Header -->
+      <div class="mb-10">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          {firm.trustpilot ? (
+            <a href={firm.trustpilotUrl} target="_blank" rel="nofollow noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold transition-colors">
+              <span class="text-yellow-400">{'★'.repeat(Math.round(Number(firm.trustpilot)))}</span>
+              <span class="text-white">{firm.trustpilot}/5</span>
+              {firm.trustpilotCount && <span class="text-slate-500 ml-1">({Number(firm.trustpilotCount).toLocaleString()} reviews)</span>}
+              <span class="text-slate-400 ml-1">Trustpilot ↗</span>
+            </a>
+          ) : (
+            <a href={firm.trustpilotUrl} target="_blank" rel="nofollow noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold transition-colors text-slate-400">
+              See Trustpilot Reviews ↗
+            </a>
+          )}
+          <div class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${isRestricted ? 'bg-red-500/10 border-red-500/20 text-red-400' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'}`}>
+            <span>🌎</span>
+            <span>US Traders: {firm.usTraders}</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-slate-500 text-xs font-medium">
+              By <span class="text-slate-300">David Fox</span>
+            </div>
+            <div class="h-4 w-px bg-slate-800"></div>
+            <div class="flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              VERIFIED & ACTIVE: <time datetime={isoDate}>{shortFormattedDate}</time>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+          {firm.name} Discount Code {currentYear}
+        </h1>
+        <p class="text-xl text-slate-400 leading-relaxed max-w-3xl">
+          Save <span class="text-white font-bold">{firm.discountAmount}</span> on your {firm.name} evaluation with our verified promo code. We manually test this coupon every 24 hours to ensure it remains 100% active for our community.
+        </p>
+      </div>
+
+      <div class="relative group mb-16">
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-violet-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+        <div class="relative bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl">
+          <FirmCard firm={firm} hideReviewLink={true} client:idle />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-12">
+          <section id="how-to-apply">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold">1</span>
+              How to Apply the {firm.name} Coupon
+            </h2>
+            <div class="bg-slate-900/50 rounded-2xl border border-slate-800 p-8 space-y-6">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs text-blue-400 border border-slate-700">1</div>
+                <p class="text-slate-300">
+                  {firm.slug === 'fxify' ? (
+                    <>Copy the code <code class="bg-slate-950 px-2 py-1 rounded text-blue-400 border border-slate-800 font-mono font-bold">fxify3</code> using the copy button above.</>
+                  ) : (
+                    <>Copy the code <code class="bg-slate-950 px-2 py-1 rounded text-blue-400 border border-slate-800 font-mono font-bold">{firm.discountCode}</code> using the copy button above.</>
+                  )}
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs text-blue-400 border border-slate-700">2</div>
+                <p class="text-slate-300">
+                  <strong class="text-white">"Start Challenge"</strong> button above to activate the offer.
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs text-blue-400 border border-slate-700">3</div>
+                <p class="text-slate-300">
+                  {firm.slug === 'fxify' ? (
+                    "Please make sure to select all the options first before applying affiliate code and then the discount code, as it would say invalid if you haven't selected Product, Account Balance, Platform and Price Feed. The affiliate code provides 15% discount and discount code is applied on top of it should it have a higher discount."
+                  ) : (
+                    `Paste the code into the coupon/discount/affiliate code field at ${firm.name} checkout and click apply.`
+                  )}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="review">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-600 text-white text-sm font-bold">2</span>
+              Full {firm.name} Review {currentYear}
+            </h2>
+            <article class="firm-article bg-slate-900/50 rounded-2xl border border-slate-800 p-8">
+              <div class="prose prose-invert prose-blue max-w-none" set:html={firm.longFormContent} />
+            </article>
+
+            <div class="mt-16 pt-10 border-t border-slate-800">
+              <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-slate-900/80 p-8 rounded-3xl border border-slate-800">
+                <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-xl border-2 border-blue-500/30 flex-shrink-0">
+                  <Image 
+                    src={failuresfx} 
+                    alt="David Fox - Trading Expert" 
+                    width={80}
+                    height={80}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-2 text-center sm:text-left">About the Author: David Fox</h4>
+                  <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    David Fox is a professional retail and prop firm trader with over 12 years of experience in the FX markets. He specializes in algorithmic execution and risk management, having successfully passed multiple 6-figure evaluations at top-tier firms. David's reviews are built on first-hand testing, where he deposits his own capital to verify broker execution and withdrawal reliability.
+                  </p>
+                  <div class="flex justify-center sm:justify-start gap-4">
+                    <a href="/about/" class="text-blue-400 text-xs font-bold hover:text-blue-300 transition-colors">View Methodology →</a>
+                    <span class="text-slate-700">|</span>
+                    <span class="text-slate-500 text-xs font-bold uppercase tracking-widest italic">Verified Expert</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <CheckoutCTA firm={firm} client:load />
+
+          <section id="bonus" class="bg-gradient-to-br from-blue-900/30 to-violet-900/30 border border-blue-500/20 rounded-2xl p-8">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white mb-1">🎁 Claim Your Free MT5 Tools</h3>
+                <p class="text-slate-400 text-sm mb-4">After registering with {firm.name} using our link or code, you qualify for our exclusive suite of custom MT5 indicators and Expert Advisors — designed specifically to pass prop firm evaluations.</p>
+                <a href="/#bonus" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl transition-all duration-300 text-sm">
+                  Claim Free MT5 Tools
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl sticky top-24">
+            <h3 class="text-base font-bold mb-5 flex items-center gap-2 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Quick Stats
+            </h3>
+            <ul class="space-y-4 text-sm">
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Discount</span>
+                <span class="text-emerald-400 font-bold">{firm.discountAmount}</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Trustpilot</span>
+                <div class="text-right">
+                  <div class="text-yellow-400 font-bold">★ {firm.trustpilot}/5</div>
+                  {firm.trustpilotCount && <div class="text-[10px] text-slate-400">{Number(firm.trustpilotCount).toLocaleString()} reviews</div>}
+                </div>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">US Traders</span>
+                <span class={`font-medium ${isRestricted ? 'text-red-400' : 'text-emerald-400'}`}>{isRestricted ? '✗ Restricted' : '✓ Allowed'}</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Code Status</span>
+                <span class="text-blue-400 font-medium">✓ Active & Verified</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Success Rate</span>
+                <span class="text-white font-medium">99.8%</span>
+              </li>
+              <li class="flex justify-between items-center pt-2 border-t border-slate-800">
+                <span class="text-slate-400">Prop Est.</span>
+                <span class="text-slate-300 font-medium">{firm.propYear}</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Broker Est.</span>
+                <span class="text-slate-300 font-medium">{firm.brokerYear}</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t border-slate-800">
+              <p class="text-xs text-slate-500 mb-2 uppercase tracking-wider font-bold">Your Code</p>
+              <div class="bg-slate-950 rounded-xl px-4 py-3 font-mono text-center font-black text-blue-400 text-lg border border-dashed border-slate-700 select-all">
+                {firm.discountCode}
+              </div>
+              {firm.expiryDate && (
+                <p class="text-[10px] text-red-500 font-bold mt-2 text-center animate-pulse uppercase tracking-wider">
+                  Expires: {firm.expiryDate}
+                </p>
+              )}
+
+              {firm.link && (
+                <a 
+                  href={firm.link} 
+                  target="_blank" 
+                  rel="nofollow noopener noreferrer"
+                  class="block w-full mt-6 text-center bg-white hover:bg-slate-100 text-slate-900 font-bold px-4 py-4 rounded-xl text-sm transition-all duration-300 shadow-xl shadow-white/5 active:scale-95"
+                >
+                  Start Challenge
+                </a>
+              )}
+            </div>
+          </div>
+
+          <a href="/" class="block w-full text-center bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white font-medium px-4 py-3 rounded-xl text-sm transition-all duration-300">
+            ← Compare All Prop Firms
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

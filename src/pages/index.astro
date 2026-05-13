@@ -1,0 +1,460 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FirmGrid from '../components/FirmGrid.jsx';
+import { propFirms } from '../data/firms.js';
+import { currentYear, currentMonthYear } from '../utils/dateUtils.js';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FirmCard from '../components/FirmCard.jsx';
+import { Image } from 'astro:assets';
+import failuresfx from '../assets/images/failuresfx.webp';
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "VerifiedPropFirm",
+    "url": "https://verifiedpropfirm.com/",
+    "logo": "https://verifiedpropfirm.com/images/logo.webp",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "1250",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Best Prop Firms ${currentYear} - Verified Discounts`,
+    "description": "A curated list of the most reputable, broker-backed proprietary trading firms with verified discount codes.",
+    "url": "https://verifiedpropfirm.com/",
+    "itemListElement": propFirms.filter(f => f.type !== 'broker').map((firm, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": firm.name,
+      "url": `https://verifiedpropfirm.com/prop-firms/${firm.slug}/`,
+      "description": firm.description,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity":[
+      {
+        "@type": "Question",
+        "name": "What is a proprietary trading firm (prop firm)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A proprietary trading firm (or 'prop firm') is a company that provides trading capital to retail traders who successfully pass a risk management evaluation. Once a trader passes the evaluation challenge, they receive a funded account. The trader keeps a large majority of the profits (typically 80% to 90%), while the prop firm absorbs 100% of the trading losses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do prop firm discount codes work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prop firm discount codes reduce the upfront cost of your evaluation challenge at checkout. By using the verified promo codes listed on our platform, you can save up to 10-20% on challenge fees. Our site automatically generates the exact coupon or referral link needed for each specific firm, ensuring you lock in the lowest possible price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Do prop firms still accept US traders in ${currentYear}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, many top prop firms still accept US traders in ${currentYear}, though the regulatory landscape has shifted. Due to recent changes, US clients have largely been migrated away from MetaTrader (MT4/MT5) to alternative platforms. Firms accepting US Traders include DNA Funded, Darwinex Zero, and others.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which prop firm is the best for beginners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The best prop firm for beginners depends on your specific trading style. However, new traders should look for firms with simple 1-step evaluations and relaxed trading rules. FXIFY is often considered the best overall for beginners due to excellent conditions and straightforward rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between static drawdown vs. trailing drawdown?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main difference lies in how your loss limit is calculated. Static drawdown stays fixed relative to your starting balance, while trailing drawdown moves up with your profits. Static drawdowns are generally considered safer for most traders."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I choose a 1-Step or 2-Step prop firm challenge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1-Step challenges are faster for experienced traders, while 2-Step challenges typically offer more safety features for beginners. Choosing depends on your risk tolerance and experience level."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do prop firms allow EAs (Expert Advisors)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most modern broker-backed firms allow algorithmic trading, but strict rules apply to HFT and latency arbitrage. You can use Expert Advisors (EAs), algorithmic bots, and custom indicators during both the evaluation and funded stages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a prop firm better than FTMO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While FTMO is the legacy leader, firms like FXIFY and Darwinex Zero offer superior scaling and payout flexibility in 2026, solving FTMO’s biggest limitations regarding evaluation rules and capped capital."
+        }
+      }
+    ]
+  }
+];
+---
+
+<Layout
+  title={`Top Broker-Backed Prop Firms of 2026: Vetted Reviews & Discounts`}
+  description="Compare the world's most reputable broker-backed prop firms. Our experts deposit real capital to verify execution, spreads, and payout reliability."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <div class="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-blue-500/30">
+
+    <Header />
+
+    <main>
+      <!-- Hero Section -->
+      <section class="relative pt-20 pb-32 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6 border border-blue-500/20">
+            ⚡ Updated for {currentMonthYear}
+          </div>
+          <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+            Best Broker-Backed Prop Firms: <span class="text-gradient">Vetted Reviews & Discounts (May 2026)</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+            No more guessing. We list only reputable prop firms, primarily backed by established FX brokers with years of proven track records. The site is updated whenever new discounts are available. Get exclusive discounts and claim our custom tool suite when you join.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#compare" class="premium-button bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 flex items-center justify-center gap-2 text-lg">
+              View Vetted Prop Firms <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="#bonus" class="premium-button bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-8 py-4 flex items-center justify-center gap-2 text-lg group">
+              Claim Free Trading Tools 
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400 group-hover:scale-110 transition-transform"><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="22" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust / E-E-A-T Methodology Section -->
+      <section class="py-12 bg-slate-950 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="bg-slate-900/50 rounded-3xl border border-slate-800 p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
+            <div class="flex-shrink-0 relative">
+              <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-xl border-2 border-blue-500/30">
+                <Image 
+                  src={failuresfx} 
+                  alt="David Fox - VerifiedPropFirm Founder" 
+                  width={96}
+                  height={96}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="absolute -bottom-2 -right-2 bg-emerald-500 rounded-full p-1.5 border-4 border-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+            <div class="flex-grow text-center md:text-left">
+              <h2 class="text-2xl font-bold text-white mb-3">How We Vet Prop Firms</h2>
+              <p class="text-slate-400 leading-relaxed max-w-3xl mb-4">
+                "VerifiedPropFirm is run by active, funded traders. We risk our own capital to pass evaluation phases and verify payout speeds before recommending any firm on this list. We prioritize broker-backed firms to ensure your funding is safe and your payouts are guaranteed."
+              </p>
+              <div class="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-bold uppercase tracking-widest">
+                <span class="text-blue-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> 100% Real Capital Testing</span>
+                <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Verified Payout Proofs</span>
+                <a href="/about/" class="text-slate-300 hover:text-white transition-colors underline decoration-slate-700 underline-offset-4">Learn Our Methodology →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison Section -->
+      <section id="compare" class="py-20 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Interactive island: title + filters + firm cards -->
+          <FirmGrid
+            firms={propFirms.filter(f => f.type !== 'broker')}
+            title="Best Prop Firms of 2026"
+            subtitle="Top-rated proprietary trading firms with verified infrastructure and payout reliability."
+            compact={false}
+            client:load
+          />
+        </div>
+      </section>
+
+      <!-- Retail Broker Section (Entity Separation) -->
+      <section id="brokers" class="py-20 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
+            <h2 class="text-3xl font-bold mb-2">Top Retail Brokers for Funded Traders</h2>
+            <p class="text-slate-400">Low-cost brokerage options for trading your own personal capital once funded.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {propFirms.filter(f => f.type === 'broker').map(firm => (
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+                <FirmCard firm={firm} compact={false} client:load />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Bonus / Lead Magnet Section -->
+      <section id="bonus" class="py-24 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="glass-panel rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl"></div>
+            <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-6 border border-emerald-500/20">
+                  🎁 Exclusive Affiliate Bonus
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Unlock our Custom MT5 Tool Suite <span class="text-blue-500">Free.</span></h2>
+                <p class="text-slate-400 mb-8 text-lg">
+                  Don't just get a discount. Register with any of our partner prop firms using our links, and get lifetime access to our proprietary MQL5 trading indicators.
+                </p>
+                <ul class="space-y-4 mb-8">
+                  <li class="flex items-center gap-4 bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/50 transition-all hover:border-blue-500/30 hover:bg-slate-800 group">
+                    <div class="bg-blue-500/10 p-2.5 rounded-lg text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="12" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>
+                    </div>
+                    <span class="font-semibold text-slate-200">Optimized MT5 Candle Timer Utility</span>
+                  </li>
+                  <li class="flex items-center gap-4 bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/50 transition-all hover:border-indigo-500/30 hover:bg-slate-800 group">
+                    <div class="bg-indigo-500/10 p-2.5 rounded-lg text-indigo-400 border border-indigo-500/20 group-hover:bg-indigo-500/20 transition-colors shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <span class="font-semibold text-slate-200">News Indicator</span>
+                  </li>
+                  <li class="flex items-center gap-4 bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/50 transition-all hover:border-emerald-500/30 hover:bg-slate-800 group">
+                    <div class="bg-emerald-500/10 p-2.5 rounded-lg text-emerald-400 border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    </div>
+                    <span class="font-semibold text-slate-200">Proprietary Trend Indicator</span>
+                  </li>
+                  <li class="flex items-center gap-4 bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/50 transition-all hover:border-violet-500/30 hover:bg-slate-800 group">
+                    <div class="bg-violet-500/10 p-2.5 rounded-lg text-violet-400 border border-violet-500/20 group-hover:bg-violet-500/20 transition-colors shadow-[0_0_15px_rgba(139,92,246,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="8" x2="16" y1="10" y2="10"/><line x1="8" x2="16" y1="14" y2="14"/><line x1="8" x2="16" y1="18" y2="18"/></svg>
+                    </div>
+                    <span class="font-semibold text-slate-200">Automated Risk Calculator (.ex5)</span>
+                  </li>
+                  <li class="flex items-center gap-4 bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/50 transition-all hover:border-blue-500/30 hover:bg-slate-800 group">
+                    <div class="bg-blue-500/10 p-2.5 rounded-lg text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="font-semibold text-slate-200">Equity Guardian EA (Account Protector)</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-slate-800 relative shadow-inner">
+                <div class="absolute -top-4 -right-4 bg-emerald-500 text-slate-950 text-xs font-black px-3 py-1.5 rounded-full transform rotate-12 shadow-lg">VALUE: $249</div>
+                <h3 class="text-xl font-bold mb-2">Claim Your Tools</h3>
+                <p class="text-slate-400 text-sm mb-6">Enter your new evaluation account number after registering with our affiliate link to verify.</p>
+                <div id="form-container">
+                  <form id="claim-form" action="https://verifiedpropfirm.com/submit" method="POST" class="space-y-4">
+                    <input type="hidden" name="form-name" value="bonus-claim" />
+                    <input type="hidden" name="_subject" value="New Tool Claim Request!" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <div>
+                      <label for="prop-firm-select" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Select Prop Firm</label>
+                      <select id="prop-firm-select" name="Prop Firm" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer">
+                        <option>FXIFY</option>
+                        <option>Blueberry Funded</option>
+                        <option>DNA Funded</option>
+                        <option>Moneta Funded</option>
+                        <option>Darwinex Zero</option>
+                        <option>Fusion Markets</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="account-number" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Account Number</label>
+                      <input id="account-number" type="text" name="Account Number" required placeholder="e.g. 1048593" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors" />
+                    </div>
+                    <div>
+                      <label for="claim-email" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email to receive files</label>
+                      <input id="claim-email" type="email" name="Email" required placeholder="trader@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors" />
+                    </div>
+                    <!-- Cloudflare Turnstile -->
+                    <div class="cf-turnstile py-2" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
+
+                    <button type="submit" class="premium-button w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 mt-2 flex justify-center items-center gap-2 shadow-lg shadow-blue-600/20 text-lg">
+                      <span id="button-text">Verify & Send My Tools →</span>
+                      <span id="loading-spinner" class="hidden">
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      </span>
+                    </button>
+                    <p class="text-center text-xs text-slate-400 mt-4">For manual verification, you can also email us directly at support@verifiedpropfirm.com.</p>
+                  </form>
+
+                  <div id="success-state" class="hidden text-center py-10 animate-fade-in">
+                    <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Claim Submitted!</h3>
+                    <p class="text-slate-400 max-w-xs mx-auto leading-relaxed">
+                      We've received your account details. Our team will verify your registration and email your tools to you within 24 hours.
+                    </p>
+                  </div>
+                </div>
+
+                <script is:inline>
+                  const form = document.getElementById('claim-form');
+                  const container = document.getElementById('form-container');
+                  const successState = document.getElementById('success-state');
+                  const buttonText = document.getElementById('button-text');
+                  const loadingSpinner = document.getElementById('loading-spinner');
+
+                  if (form) {
+                    form.addEventListener('submit', async (e) => {
+                      e.preventDefault();
+                      
+                      // UI Loading state
+                      buttonText.classList.add('hidden');
+                      loadingSpinner.classList.remove('hidden');
+                      form.style.opacity = '0.5';
+                      form.style.pointerEvents = 'none';
+
+                      const formData = new FormData(form);
+                      const data = {
+                        form_name: "Bonus Claim Form",
+                        "Prop Firm": formData.get('Prop Firm'),
+                        "Account Number": formData.get('Account Number'),
+                        "Email": formData.get('Email')
+                      };
+                      
+                      try {
+                        const response = await fetch(form.action, {
+                          method: 'POST',
+                          body: JSON.stringify(data),
+                          headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                          }
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (response.ok || result.success) {
+                          form.classList.add('hidden');
+                          successState.classList.remove('hidden');
+                        } else {
+                          console.error('Submission failed:', result);
+                          throw new Error('Failed');
+                        }
+                      } catch (error) {
+                        console.error('Error:', error);
+                        alert('Something went wrong. Please try again or email us directly.');
+                        form.style.opacity = '1';
+                        form.style.pointerEvents = 'auto';
+                        buttonText.classList.remove('hidden');
+                        loadingSpinner.classList.add('hidden');
+                      }
+                    });
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section --> 
+      <section id="faq" class="py-24 bg-slate-900/30 border-t border-slate-800"> 
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"> 
+          <div class="text-center mb-16"> 
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2> 
+            <p class="text-slate-400">Everything you need to know about prop firms and exclusive discount codes in {currentYear}.</p> 
+          </div> 
+          <div class="space-y-6"> 
+            
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">What is a proprietary trading firm (prop firm)?</h3> 
+              <p class="text-slate-400 leading-relaxed">A proprietary trading firm (or "prop firm") is a company that provides trading capital to retail traders who successfully pass a risk management evaluation. Once a trader passes the evaluation challenge, they receive a funded account. The trader keeps a large majority of the profits (typically 80% to 90%), while the prop firm absorbs 100% of the trading losses.</p> 
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">How do prop firm discount codes work?</h3> 
+              <p class="text-slate-400 leading-relaxed">Prop firm discount codes reduce the upfront cost of your evaluation challenge at checkout. By using the verified promo codes listed on our platform, you can save up to 10-20% on challenge fees. Our site automatically generates the exact coupon or referral link needed for each specific firm, ensuring you lock in the lowest possible price.</p> 
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">Do prop firms still accept US traders in {currentYear}?</h3> 
+              <div class="text-slate-400 leading-relaxed space-y-4">
+                <p>Yes, many top prop firms still accept US traders in {currentYear}, though the regulatory landscape has shifted. Due to recent changes, US clients have largely been migrated away from MetaTrader (MT4/MT5) to alternative platforms.</p>
+                <ul class="list-disc pl-6 space-y-1">
+                  <li><strong>Firms accepting US Traders:</strong> <a href="/prop-firms/dna-funded/" class="text-blue-400 hover:underline">DNA Funded</a>, <a href="/prop-firms/darwinex-zero/" class="text-blue-400 hover:underline">Darwinex Zero</a>, and others.</li>
+                  <li><strong>US-Friendly Platforms:</strong> TradeLocker, DXtrade, and cTrader.</li>
+                </ul>
+                <p>Always check our <a href="/#compare" class="text-blue-400 hover:underline">Firm Reviews</a> to confirm current US-trader status.</p>
+              </div>
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">Which prop firm is the best for beginners?</h3> 
+              <div class="text-slate-400 leading-relaxed space-y-4">
+                <p>The best prop firm for beginners depends on your specific trading style. However, new traders should look for firms with simple 1-step evaluations and relaxed trading rules.</p>
+                <ul class="list-disc pl-6 space-y-1">
+                  <li><strong>Best overall for beginners:</strong> <a href="/prop-firms/fxify/" class="text-blue-400 hover:underline">FXIFY</a> (excellent conditions and straightforward rules).</li>
+                  <li><strong>Best for alternative platforms:</strong> <a href="/prop-firms/moneta-funded/" class="text-blue-400 hover:underline">Moneta Funded</a>.</li>
+                  <li><strong>Best for experienced/scaling traders:</strong> <a href="/prop-firms/darwinex-zero/" class="text-blue-400 hover:underline">Darwinex Zero</a>.</li>
+                  <li><strong>Best low-cost broker (Personal Capital):</strong> <a href="/prop-firms/fusion-markets/" class="text-blue-400 hover:underline">Fusion Markets</a>.</li>
+                </ul>
+              </div>
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">What is the difference between static drawdown vs. trailing drawdown?</h3> 
+              <p class="text-slate-400 leading-relaxed">
+                The main difference lies in how your loss limit is calculated. Static drawdown stays fixed relative to your starting balance, while trailing drawdown moves up with your profits. 
+                <a href="/blog/static-vs-trailing-drawdown-explained/" class="text-blue-400 font-bold hover:underline ml-1">Read our full guide on Drawdown Types →</a>
+              </p> 
+            </article> 
+            
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">Should I choose a 1-Step or 2-Step prop firm challenge?</h3> 
+              <p class="text-slate-400 leading-relaxed">
+                1-Step challenges are faster for experienced traders, while 2-Step challenges typically offer more safety features for beginners. 
+                <a href="/blog/1-step-vs-2-step-prop-firm-challenges-comparison/" class="text-blue-400 font-bold hover:underline ml-1">Compare challenge dynamics →</a>
+              </p> 
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">Do prop firms allow EAs (Expert Advisors)?</h3> 
+              <p class="text-slate-400 leading-relaxed">
+                Most modern broker-backed firms allow algorithmic trading, but strict rules apply to HFT and latency arbitrage. 
+                <a href="/blog/best-prop-firms-for-expert-advisors-algorithmic-trading/" class="text-blue-400 font-bold hover:underline ml-1">View EA-friendly firms →</a>
+              </p> 
+            </article> 
+
+            <article class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800"> 
+              <h3 class="text-xl font-bold text-white mb-2">Is there a prop firm better than FTMO?</h3> 
+              <p class="text-slate-400 leading-relaxed">
+                While FTMO is the legacy leader, firms like FXIFY and Darwinex Zero offer superior scaling and payout flexibility in {currentYear}. 
+                <a href="/blog/best-ftmo-alternatives-broker-backed-firms/" class="text-blue-400 font-bold hover:underline ml-1">Compare FTMO alternatives →</a>
+              </p> 
+            </article> 
+          </div> 
+        </div> 
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

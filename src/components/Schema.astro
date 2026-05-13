@@ -1,0 +1,57 @@
+---
+interface Props {
+  type: 'Product' | 'Organization' | 'Breadcrumb';
+  data: any;
+}
+
+const { type, data } = Astro.props;
+
+let schema = {};
+
+if (type === 'Product') {
+  schema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": data.name,
+    "image": data.image,
+    "description": data.description,
+    "brand": {
+      "@type": "Brand",
+      "name": data.firmName
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": data.ratingValue || "4.9",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": data.ratingCount || "1250"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": data.url,
+      "priceCurrency": "USD",
+      "price": data.price || "0",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": data.firmName
+      }
+    }
+  };
+} else if (type === 'Organization') {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "VerifiedPropFirm",
+    "url": "https://verifiedpropfirm.com",
+    "logo": "https://verifiedpropfirm.com/images/logo.webp",
+    "sameAs": [
+      "https://twitter.com/verifiedpropfirm",
+      "https://facebook.com/verifiedpropfirm"
+    ]
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

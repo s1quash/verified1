@@ -1,0 +1,182 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import failuresfx from '../../assets/images/failuresfx.webp';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Dynamic Asset Import Mapping for Blog Images
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/*.{jpeg,jpg,png,gif,webp}');
+const imagePath = `/src/assets${post.data.image}`;
+const heroImage = images[imagePath];
+
+if (!heroImage && post.data.image) {
+    console.error(`Image not found: ${imagePath}. Make sure it exists in src/assets/images/blog/`);
+}
+
+const breadcrumbItems = [
+  { name: 'Blog', url: '/blog/' },
+  { name: post.data.title, url: `/blog/${post.id}/` },
+];
+
+// SSG Date Generation for SEO Freshness
+const today = new Date();
+const isoDate = today.toISOString().split('T')[0];
+const fullFormattedDate = today.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+});
+---
+
+<Layout title={`${post.data.title} | VerifiedPropFirm Blog`} description={post.data.description} image={post.data.image}>
+  <link rel="preload" as="image" href={post.data.image} fetchpriority="high" slot="head" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://verifiedpropfirm.com/blog/${post.id}/`
+    },
+    "headline": post.data.title,
+    "image": `https://verifiedpropfirm.com${post.data.image}`,  
+    "author": {
+      "@type": "Person",
+      "name": post.data.author,
+      "url": post.data.author === "David Fox" ? "https://verifiedpropfirm.com/about/" : "https://verifiedpropfirm.com"
+    },  
+    "publisher": {
+      "@type": "Organization",
+      "name": "VerifiedPropFirm",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://verifiedpropfirm.com/images/logo.png"
+      }
+    },
+    "datePublished": post.data.pubDate.toISOString().split('T')[0],
+    "dateModified": isoDate
+  })} />
+  <div class="min-h-screen bg-slate-950 text-slate-50 font-sans">
+    <Header />
+
+    <main class="py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Breadcrumbs items={breadcrumbItems} />
+
+        <article class="relative">
+          <header class="mb-12">
+            <div class="flex items-center gap-4 mb-6 text-sm">
+                <span class="text-blue-400 font-bold uppercase tracking-widest text-[10px]">
+                    {post.data.tags?.[0] || 'Trading News'}
+                </span>
+                <span class="w-1 h-1 rounded-full bg-slate-700"></span>
+                <span class="text-slate-500">
+                    <time datetime={post.data.pubDate.toISOString().split('T')[0]}>
+                        {post.data.pubDate.toLocaleDateString('en-US', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric'
+                        })}
+                    </time>
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-8 leading-tight">
+              {post.data.title}
+            </h1>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-900 border border-slate-800 w-fit">
+                <div class="w-10 h-10 rounded-full overflow-hidden border border-blue-500/30 flex-shrink-0 bg-slate-800">
+                    <Image 
+                      src={failuresfx} 
+                      alt="David Fox" 
+                      width={40}
+                      height={40}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                </div>
+                <div>
+                    <div class="text-xs text-slate-500 font-medium">Written by</div>
+                    <div class="text-sm font-bold text-white">{post.data.author}</div>
+                    {post.data.author === "David Fox" && (
+                        <div class="text-[10px] text-blue-400 font-bold uppercase tracking-wider mt-0.5">Trader & Algorithmic Developer</div>
+                    )}
+                </div>
+                <div class="ml-auto flex flex-col items-end">
+                    <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Last Verified
+                    </div>
+                    <div class="text-[10px] text-slate-500 font-medium mt-1">
+                        <time datetime={isoDate}>{fullFormattedDate}</time>
+                    </div>
+                </div>
+            </div>
+            
+            {post.data.image && (
+              <div class="mb-12 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+                {heroImage ? (
+                  <Image 
+                    src={heroImage()} 
+                    alt={post.data.title} 
+                    width={800}
+                    height={450}
+                    class="w-full h-auto object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                ) : (
+                  <img 
+                    src={post.data.image} 
+                    alt={post.data.title} 
+                    class="w-full h-auto object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                )}
+              </div>
+            )}
+          </header>
+
+          <div class="prose-custom max-w-none">
+            <Content />
+          </div>
+
+          <footer class="mt-20 pt-12 border-t border-slate-900">
+            <div class="bg-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-800 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-600/5 via-transparent to-transparent"></div>
+                <h3 class="text-2xl font-bold mb-4 relative z-10">Start Your Funding Journey Properly</h3>
+                <p class="text-slate-400 mb-8 max-w-2xl relative z-10">
+                    Don't risk your capital with unverified firms. Check our manual audits and claim exclusive discounts from the world's leading broker-backed prop firms.
+                </p>
+                <div class="flex flex-wrap gap-4 relative z-10">
+                    <a href="/#compare" class="premium-button bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 font-bold">
+                        Compare Prop Firms & Discounts
+                    </a>
+                    <a href="/#bonus" class="premium-button bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 font-bold border border-slate-700">
+                        Our Free Tools
+                    </a>
+                </div>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

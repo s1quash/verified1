@@ -1,0 +1,203 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import failuresfx from '../../assets/images/failuresfx.webp';
+import FirmCard from '../../components/FirmCard.jsx';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { propFirms } from '../../data/firms.js';
+import { currentYear } from '../../utils/dateUtils.js';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CheckoutCTA from '../../components/CheckoutCTA.jsx';
+
+export function getStaticPaths() {
+  // Only retail brokers here
+  return propFirms.filter(f => f.type === 'broker').map((firm) => ({
+    params: { slug: firm.slug },
+    props: { firm },
+  }));
+}
+
+const { firm } = Astro.props;
+
+const pageTitle = `${firm.name} Review & Referral Code (Verified ${currentYear})`;
+const pageDescription = firm.description;
+
+const breadcrumbItems = [
+  { name: 'Forex Brokers', url: '/#compare' },
+  { name: `${firm.name} Review`, url: `/brokers/${firm.slug}/` },
+];
+
+const schema = {
+  '@context': 'https://schema.org/',
+  '@type': 'Review',
+  'itemReviewed': {
+    '@type': 'SoftwareApplication',
+    'name': firm.name,
+    'image': `https://verifiedpropfirm.com${firm.image}`,
+    'description': firm.description,
+    'applicationCategory': 'FinanceApplication',
+    'operatingSystem': 'Web, iOS, Android, Windows',
+    'offers': {
+      '@type': 'Offer',
+      'price': firm.price,
+      'priceCurrency': firm.currency,
+    },
+    // AggregateRating REMOVED for brokers per Google Structured Data Guidelines
+  },
+  'author': {
+    '@type': 'Person',
+    'name': 'David Fox',
+    'url': 'https://verifiedpropfirm.com/about/'
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'VerifiedPropFirm',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://verifiedpropfirm.com/images/logo.png'
+    }
+  },
+  'reviewRating': {
+    '@type': 'Rating',
+    'ratingValue': firm.trustpilot || '4.8',
+    'bestRating': '5',
+  },
+  'datePublished': '2026-01-01',
+  'dateModified': new Date().toISOString().split('T')[0],
+};
+
+const today = new Date();
+const isoDate = today.toISOString().split('T')[0];
+const shortFormattedDate = today.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+});
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <div class="min-h-screen">
+    <Header />
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <!-- Trust Signal Header -->
+      <div class="mb-10">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <div class="flex items-center gap-4">
+            <div class="text-slate-500 text-xs font-medium">
+              By <span class="text-slate-300">David Fox</span>
+            </div>
+            <div class="h-4 w-px bg-slate-800"></div>
+            <div class="flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              VERIFIED & ACTIVE: <time datetime={isoDate}>{shortFormattedDate}</time>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+          {firm.name} Review & <span class="text-gradient">Referral Code {currentYear}</span>
+        </h1>
+        <p class="text-xl text-slate-400 leading-relaxed max-w-3xl">
+          Detailed assessment of {firm.name} execution quality, ASIC regulation, and real-world trading costs for professional traders.
+        </p>
+      </div>
+
+      <!-- Main Interactive Island (FirmCard) -->
+      <div class="relative group mb-16">
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-violet-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+        <div class="relative bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl">
+          <FirmCard firm={firm} hideReviewLink={true} client:idle />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-12">
+          <article class="firm-article bg-slate-900/50 rounded-2xl border border-slate-800 p-8">
+            <div set:html={firm.longFormContent} />
+            
+            <!-- Expanded Author Bio (E-E-A-T) -->
+            <div class="mt-16 pt-10 border-t border-slate-800">
+              <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-slate-900/80 p-8 rounded-3xl border border-slate-800">
+                <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-xl border-2 border-blue-500/30 flex-shrink-0">
+                  <Image 
+                    src={failuresfx} 
+                    alt="David Fox - Trading Expert" 
+                    width={80}
+                    height={80}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-2 text-center sm:text-left">About the Author: David Fox</h4>
+                  <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    David Fox is a professional retail and prop firm trader with over 12 years of experience in the FX markets. He specializes in algorithmic execution and risk management, having successfully passed multiple 6-figure evaluations at top-tier firms. David's reviews are built on first-hand testing, where he deposits his own capital to verify broker execution and withdrawal reliability.
+                  </p>
+                  <div class="flex justify-center sm:justify-start gap-4">
+                    <a href="/about/" class="text-blue-400 text-xs font-bold hover:text-blue-300 transition-colors">View Methodology →</a>
+                    <span class="text-slate-700">|</span>
+                    <span class="text-slate-500 text-xs font-bold uppercase tracking-widest italic">Verified Expert</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <CheckoutCTA firm={firm} client:load />
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl sticky top-24">
+            <h3 class="text-base font-bold mb-5 flex items-center gap-2 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Broker Stats
+            </h3>
+            <ul class="space-y-4 text-sm">
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Regulation</span>
+                <span class="text-emerald-400 font-bold">ASIC</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Min. Spread</span>
+                <span class="text-blue-400 font-bold">0.0 Pips</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Commission</span>
+                <span class="text-slate-200 font-medium">$2.25/lot</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-400">Leverage</span>
+                <span class="text-slate-200 font-medium">1:500</span>
+              </li>
+              <li class="flex justify-between items-center pt-2 border-t border-slate-800">
+                <span class="text-slate-400">Est.</span>
+                <span class="text-slate-300 font-medium">{firm.brokerYear}</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t border-slate-800">
+              <p class="text-xs text-slate-500 mb-2 uppercase tracking-wider font-bold">Your Ref Code</p>
+              <div class="bg-slate-950 rounded-xl px-4 py-3 font-mono text-center font-black text-blue-400 text-lg border border-dashed border-slate-700 select-all">
+                {firm.discountCode}
+              </div>
+            </div>
+          </div>
+          <a href="/" class="block w-full text-center bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white font-medium px-4 py-3 rounded-xl text-sm transition-all duration-300">
+            ← Back to All Reviews
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

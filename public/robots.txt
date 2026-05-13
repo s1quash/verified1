@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://verifiedpropfirm.com/sitemap-index.xml

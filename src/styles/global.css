@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #020617;
+    color: #f8fafc;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .text-gradient {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to right, #60a5fa, #818cf8, #c084fc);
+  }
+
+  .premium-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    transition: all 300ms;
+  }
+  
+  .premium-card:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .premium-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    transition: all 300ms;
+  }
+  
+  .premium-button:hover { transform: scale(1.02); }
+  .premium-button:active { transform: scale(0.98); }
+  
+  .premium-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+  .premium-button:hover::after { opacity: 1; }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background-color: #020617; }
+::-webkit-scrollbar-thumb { background-color: #1e293b; border-radius: 9999px; border: 2px solid #020617; }
+::-webkit-scrollbar-thumb:hover { background-color: #334155; }
