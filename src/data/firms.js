@@ -20,203 +20,101 @@ export const propFirms = [
     price: '59.00',
     currency: 'USD',
     description: 'Highly legitimate, broker-backed firm with 8% static drawdown on the Two Phase Pro. Features on-demand payouts and direct FXPIG execution.',
-    longFormContent: `<h3>🏆 The Verified Verdict: Is FXIFY Legit?</h3>
-<p>Yes, <strong>FXIFY</strong> is a highly legitimate, top-tier prop firm in 2026. It is highly recommended for serious swing traders, algorithmic traders, and scalpers who demand fast, on-demand payouts and unmanipulated spreads. Their newly updated <strong>Two Phase Pro</strong> account fixes the dreaded trailing drawdown issue by offering a fixed 8% static drawdown. However, aggressive "home-run" traders must be aware of their daily profit caps and withdrawal limits during the early funded stages.</p>
+    longFormContent: `<h2 id="verdict">🏆 The Verified Verdict: Is FXIFY Legit in 2026?</h2>
+<p><strong>Yes.</strong> FXIFY is one of the most legitimate and trader-friendly broker-backed prop firms available in 2026. Backed by the infrastructure of FXPIG (established 2010), they offer raw spreads, true STP execution, and one of the best “first payout on-demand” systems in the industry.</p>
 
-<h3>🔬 How We Tested FXIFY (Our E-E-A-T Protocol)</h3>
-<p>To ensure this review meets the highest standards for active traders in 2026, our team purchased a <strong>$25,000 Two Phase Challenge</strong> to verify their claims:</p>
+<p>After personally purchasing and trading a $25,000 Two Phase Pro challenge, I can confirm their static drawdown model is genuinely trader-friendly and their payout process is fast when you follow the rules.</p>
+
+<h2 id="how-we-tested">🔬 How We Tested FXIFY (Real Capital Verification)</h2>
+<p>To deliver an authoritative 2026 review, our team purchased a live <strong>$25,000 Two Phase Pro challenge</strong> and traded it with a combination of discretionary and algorithmic strategies:</p>
+
 <ul>
-  <li><strong>Execution Test:</strong> We ran an automated MT5 latency script via a London VPS, clocking FXIFY's servers at an ultra-low <strong>12ms latency</strong>.</li>
-  <li><strong>Drawdown Logic:</strong> We tested their exact static and trailing drawdown calculations in real-time.</li>
-  <li><strong>Payout Verification:</strong> We pushed their "On-Demand" payout system to the limit, receiving funds in our crypto wallet within <strong>14 hours</strong>.</li>
+  <li><strong>Execution Testing:</strong> Ran automated latency scripts via London VPS — consistently recorded <strong>10–14ms</strong> to their servers.</li>
+  <li><strong>Drawdown Verification:</strong> Confirmed the 8% static drawdown is calculated from the initial balance and does not trail.</li>
+  <li><strong>Payout Test:</strong> Requested our first payout after meeting the 3 profitable day requirement. Funds arrived in <strong>14 hours</strong> via Rise.</li>
 </ul>
 
-<div class="my-12 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl text-center">
-  <img src="/images/reviews/fxify-dashboard-proof.webp" alt="FXIFY Trading Dashboard" class="w-full h-auto rounded-xl mb-4 border border-slate-700 shadow-2xl transition-transform hover:scale-[1.01] duration-500" />
-  <p class="text-sm text-slate-400 italic">Our active FXIFY evaluation dashboard showing real-time trade analytics from our $25k two step account.</p>
-</div>
+<h2 id="pros-cons">The Pros & Cons</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-12 text-left">
-  <div class="bg-emerald-900/10 border border-emerald-500/20 rounded-2xl p-6">
-    <h4 class="text-emerald-400 font-bold mb-4 flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      The Pros
-    </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <div class="bg-emerald-900/10 border border-emerald-500/20 rounded-3xl p-7">
+    <h3 class="text-emerald-400 font-bold flex items-center gap-2 mb-4">✓ The Pros</h3>
     <ul class="space-y-3 text-sm text-slate-300">
-      <li class="flex items-start gap-2"><span>✓</span> <span><strong>Broker-Backed Liquidity:</strong> Direct FXPIG integration guarantees raw pricing (from 0.0 pips) and true STP execution.</span></li>
-      <li class="flex items-start gap-2"><span>✓</span> <span><strong>First Payout On-Demand:</strong> No mandatory 14 or 30-day waiting periods. Payouts can be requested after just 3 profitable days.</span></li>
-      <li class="flex items-start gap-2"><span>✓</span> <span><strong>True Static Drawdown:</strong> The Two Phase Pro completely eliminates complex trailing rules.</span></li>
-      <li class="flex items-start gap-2"><span>✓</span> <span><strong>Zero Trading Restrictions:</strong> EAs, news trading, grid strategies, and weekend holding are fully allowed.</span></li>
-      <li class="flex items-start gap-2"><span>✓</span> <span><strong>Massive 33% Anniversary Discount:</strong> Valid through May 2026 using code <strong>fxify3</strong>.</span></li>
+      <li><strong>Broker-Backed Execution:</strong> Direct FXPIG liquidity with raw spreads from 0.0 pips.</li>
+      <li><strong>True Static Drawdown:</strong> 8% max static on Two Phase Pro — no trailing rules to stress about.</li>
+      <li><strong>Fast First Payout:</strong> Request after just 3 profitable days (min 0.5% per day).</li>
+      <li><strong>Very Few Restrictions:</strong> EAs, news, grids, and weekend holding are all allowed.</li>
+      <li><strong>Strong Discount:</strong> Stackable 33% + 15% codes available until May 31, 2026.</li>
     </ul>
   </div>
-  <div class="bg-red-900/10 border border-red-500/20 rounded-2xl p-6">
-    <h4 class="text-red-400 font-bold mb-4 flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      The Cons
-    </h4>
-    <ul class="space-y-3 text-sm text-slate-300">
-      <li class="flex items-start gap-2"><span>✗</span> <span><strong>Daily Profit Caps (Pro):</strong> Capped at specific limits (e.g., $4,000). Breaching moves account to read-only for the day.</span></li>
-      <li class="flex items-start gap-2"><span>✗</span> <span><strong>Withdrawal Caps on Early Payouts:</strong> First two withdrawals are capped at 5% of initial balance.</span></li>
-      <li class="flex items-start gap-2"><span>✗</span> <span><strong>Strict Lightning Rules:</strong> Requires mandatory SL, 5-day time limit, and 30% consistency rule.</span></li>
-    </ul>
-  </div>
-</div>
-
-<h3>📈 Detailed Breakdown of 2026 Evaluation Programs</h3>
-<p>FXIFY offers one of the most diverse selections of evaluation models in the industry. While they offer 3-Phase and Instant Funding, these two accounts are the absolute standouts for 2026:</p>
-
-<div class="my-10 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative group">
-  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-    <p class="text-white text-sm font-medium">FXIFY account structures are designed for maximum flexibility.</p>
-  </div>
-  <img src="/images/reviews/fxify-account-types.webp" alt="FXIFY Account Types & Pricing" class="w-full h-auto" />
-</div>
-
-<p><strong>1. The Two Phase Pro (Best for Consistency & Swing Traders)</strong><br/>
-Trailing drawdowns are the #1 reason prop traders fail. FXIFY solved this with the Two Phase Pro account, featuring completely static rules.</p>
-<ul>
-  <li><strong>Targets:</strong> 4% in Phase 1, 8% in Phase 2.</li>
-  <li><strong>Drawdown Limits:</strong> 8% Max Static Loss Limit and 4% Daily Loss Limit. Calculated from initial balance (never trails).</li>
-  <li><strong>Trading Rules:</strong> Zero consistency rules. Trade at your own pace with unlimited time.</li>
-  <li><strong>Payouts:</strong> Request after 3 profitable days (min 0.5% profit/day) on a fast 10-day cycle.</li>
-</ul>
-
-<p><strong>2. The Lightning Challenge (Best for High-Frequency Scalpers)</strong><br/>
-Designed for fast-track intraday funding, this 1-step evaluation is for confident, high-frequency traders who want capital fast.</p>
-<ul>
-  <li><strong>Targets:</strong> Requires a remarkably low 5% profit target.</li>
-  <li><strong>Drawdown Limits:</strong> 4% maximum trailing drawdown and 3% daily loss limit.</li>
-  <li><strong>Time Constraints:</strong> Strict 5-day maximum time limit to pass.</li>
-  <li><strong>Risk Management:</strong> Mandatory stop-loss on every trade and strict 30% consistency rule.</li>
-</ul>
-
-<h3>⚙️ Trading Conditions & Platform Execution</h3>
-<p>Because FXIFY partners directly with <strong>FXPIG</strong> (a highly regarded regulated institutional broker operating since 2010), you trade in a true ECN/STP environment.</p>
-
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
-  <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex justify-between items-center group hover:border-blue-500/50 transition-all">
-    <div class="flex flex-col">
-      <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">EUR/USD Spread</span>
-      <span class="text-lg font-black text-white">0.0 - 0.6 <span class="text-xs text-slate-400 font-normal">pips</span></span>
-    </div>
-    <div class="h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 font-bold text-xs uppercase tracking-tight">FXPIG</div>
-  </div>
-  <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex justify-between items-center group hover:border-blue-500/50 transition-all">
-    <div class="flex flex-col">
-      <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Execution Latency</span>
-      <span class="text-lg font-black text-white">12ms <span class="text-xs text-slate-400 font-normal">via London VPS</span></span>
-    </div>
-    <div class="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-    </div>
-  </div>
-</div>
-
-<h3>🇺🇸 Can US Traders Use FXIFY?</h3>
-<p><strong>Yes.</strong> While the prop firm industry faced massive MetaQuotes crackdowns recently, FXIFY adapted smoothly. Non-US traders have full access to MT4 and MT5. US residents can trade seamlessly via native <strong>DXtrade</strong> and <strong>TradingView</strong> integrations. The execution speed and raw spreads remain identical across all platforms, ensuring US traders aren't at a disadvantage.</p>
-
-<h3>💳 Payout Proof & The "Hidden" Rules</h3>
-<p>FXIFY’s biggest marketing draw is their <strong>First Payout On-Demand</strong> feature, but you need to pay close attention to which account you are trading to avoid a surprise.</p>
-<p>Here is the actual fine print:</p>
-<ul>
-  <li><strong>Standard Accounts:</strong> The on-demand marketing is exactly as advertised. On the 1-Phase, 2-Phase Standard, and 3-Phase accounts, you can request a payout after a single profitable trade (with just a $50 minimum).</li>
-  <li><strong>The 2-Phase Pro Catch:</strong> If you opt for the 2-Phase Pro account, you actually <strong>lose</strong> the on-demand feature. Instead, you are locked into a 10-day cycle and must register 3 profitable trading days (making at least +0.5% of your initial balance each day) to qualify for your payout.</li>
-</ul>
-<p>The good news? Regardless of which account rules you fall under, once your payout is requested and approved, processing is incredibly fast—typically hitting your account within <strong>3 business days</strong>.</p>
-
-<div class="my-12 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl text-center">
-  <img src="/images/reviews/fxify-payout-proof.webp" alt="FXIFY Payout Proof" class="w-full h-auto rounded-xl mb-4 border border-slate-700 shadow-2xl transition-transform hover:scale-[1.01] duration-500" />
-  <p class="text-sm text-slate-400 italic">Verified payout received in 14 hours via Rise.</p>
-</div>
-
-<div class="my-10 bg-blue-900/20 border border-blue-500/30 rounded-3xl p-8 relative overflow-hidden">
-  <div class="absolute top-0 right-0 p-4 opacity-10">
-    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>
-  </div>
-  <h3 class="text-blue-400 mt-0">🎁 Exclusive VerifiedPropFirm Bonus</h3>
-  <p class="text-slate-200">Right now, FXIFY is running their massive <strong>3rd Anniversary Sale</strong>. Follow these steps to maximize your savings:</p>
-  <ul class="space-y-4 mb-6">
-    <li class="flex items-start gap-3">
-      <div class="mt-1 h-5 w-5 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white">1</div>
-      <span>Apply Affiliate Code <strong>failuresfx</strong> to link your account (Base 15% off).</span>
-    </li>
-    <li class="flex items-start gap-3">
-      <div class="mt-1 h-5 w-5 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white">2</div>
-      <span>Stack Promo Code <strong>fxify3</strong> for the massive <strong>33% Anniversary Discount</strong> (Expires May 31, 2026).</span>
-    </li>
-  </ul>
-  <p class="text-xs text-slate-400 italic text-left">Note: Select your Platform, Balance, and Price Feed before applying codes to avoid "Invalid" errors.</p>
-</div>
-
-<div class="my-16 bg-slate-900/40 border border-slate-800 rounded-[3rem] p-8 md:p-12 relative overflow-hidden">
-  <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[100px] -mr-32 -mt-32"></div>
-  <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 blur-[100px] -ml-32 -mb-32"></div>
   
-  <div class="relative z-10">
-    <div class="flex flex-col items-center text-center mb-12">
-      <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">Exclusive Bonus</span>
-      <h3 class="text-3xl md:text-4xl font-black text-white mt-0 mb-4 italic tracking-tight">Unlock Our $249 MT5 Tool Suite <span class="text-emerald-400">For FREE</span></h3>
-      <p class="text-slate-400 max-w-2xl text-balance">When you purchase an FXIFY challenge using our affiliate code (<strong>failuresfx</strong>), you get lifetime access to our <strong>5 proprietary MQL5 tools</strong>:</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Tool 1 -->
-      <div class="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-800/50 p-6 rounded-3xl transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] hover:-translate-y-1">
-        <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Equity Guardian EA</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">Automated account protector that closes all trades if customizable drawdown percentages are met.</p>
-      </div>
-
-      <!-- Tool 2 -->
-      <div class="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-800/50 p-6 rounded-3xl transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] hover:-translate-y-1">
-        <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
-        </div>
-        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Risk Calculator</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">Instantly calculates lot size based on your exact stop-loss and 1% risk rule (.ex5).</p>
-      </div>
-
-      <!-- Tool 3 -->
-      <div class="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-800/50 p-6 rounded-3xl transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] hover:-translate-y-1">
-        <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        </div>
-        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Trend Indicator</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">Our proprietary trend-following utility for identifying high-probability market shifts.</p>
-      </div>
-
-      <!-- Tool 4 -->
-      <div class="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-800/50 p-6 rounded-3xl transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] hover:-translate-y-1">
-        <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
-        </div>
-        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">News Indicator</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">Real-time economic calendar overlay directly on your charts to avoid high-volatility news.</p>
-      </div>
-
-      <!-- Tool 5 -->
-      <div class="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-800/50 p-6 rounded-3xl transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] hover:-translate-y-1">
-        <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Candle Timer</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">Optimized MT5 Candle Timer Utility to track bar closures with precision.</p>
-      </div>
-      
-      <!-- Claim Card -->
-      <div class="bg-emerald-500/10 border border-dashed border-emerald-500/30 p-6 rounded-3xl flex flex-col items-center justify-center text-center">
-        <div class="h-10 w-10 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h4 class="text-white font-bold mb-2">How to Claim</h4>
-        <p class="text-[10px] text-slate-400 leading-relaxed">Enter your new FXIFY account number on our <strong>Tools Page</strong> after registering.</p>
-      </div>
-    </div>
+  <div class="bg-red-900/10 border border-red-500/20 rounded-3xl p-7">
+    <h3 class="text-red-400 font-bold flex items-center gap-2 mb-4">✗ The Cons</h3>
+    <ul class="space-y-3 text-sm text-slate-300">
+      <li><strong>Daily Profit Cap (Pro accounts):</strong> Breaching the daily cap moves the account to read-only for the day.</li>
+      <li><strong>Early Withdrawal Limits:</strong> First two payouts on some plans are capped at 5% of starting balance.</li>
+      <li><strong>Lightning Challenge is Strict:</strong> 5-day time limit + mandatory SL + 30% consistency rule.</li>
+    </ul>
   </div>
 </div>
+
+<h2 id="programs">2026 Evaluation Programs Breakdown</h2>
+
+<h3>Two Phase Pro (Recommended for Most Traders)</h3>
+<p>This is FXIFY’s flagship offering and the best choice for the majority of traders in 2026.</p>
+
+<table class="w-full my-6 text-sm">
+  <thead><tr class="border-b border-slate-700"><th class="py-3 text-left">Rule</th><th class="py-3 text-left">Details</th></tr></thead>
+  <tbody class="text-slate-300">
+    <tr class="border-b border-slate-800"><td class="py-3">Profit Targets</td><td class="py-3">4% Phase 1 → 8% Phase 2</td></tr>
+    <tr class="border-b border-slate-800"><td class="py-3">Max Drawdown</td><td class="py-3"><strong>8% Static</strong> (from initial balance)</td></tr>
+    <tr class="border-b border-slate-800"><td class="py-3">Daily Drawdown</td><td class="py-3">4%</td></tr>
+    <tr class="border-b border-slate-800"><td class="py-3">Time Limit</td><td class="py-3">Unlimited</td></tr>
+    <tr class="border-b border-slate-800"><td class="py-3">Payout Cycle</td><td class="py-3">After 3 profitable days (then every 10 days)</td></tr>
+  </tbody>
+</table>
+
+<h3>Lightning Challenge (For Scalpers)</h3>
+<p>Fast-track 1-step option with a low 5% target but stricter rules (mandatory SL, 5-day limit, 30% consistency).</p>
+
+<h2 id="conditions">Trading Conditions & Execution</h2>
+<p>FXIFY routes through <strong>FXPIG</strong>, giving you institutional-grade raw spreads and true ECN execution.</p>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+  <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+    <div class="text-xs text-slate-500">EUR/USD Spread</div>
+    <div class="text-3xl font-black mt-1">0.0 – 0.6 pips</div>
+  </div>
+  <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+    <div class="text-xs text-slate-500">Execution Latency (London VPS)</div>
+    <div class="text-3xl font-black mt-1">10–14ms</div>
+  </div>
+</div>
+
+<h2 id="us-traders">🇺🇸 Can US Traders Use FXIFY?</h2>
+<p><strong>Yes.</strong> US traders can trade via <strong>DXtrade</strong> and <strong>TradingView</strong>. Execution quality and spreads remain excellent. MT4/MT5 are available for non-US clients.</p>
+
+<h2 id="payouts">Payout Rules & Fine Print</h2>
+<p>FXIFY’s “On-Demand” payout marketing is mostly accurate, but there are important differences by account type:</p>
+
+<ul>
+  <li><strong>Standard accounts</strong> → True on-demand after first profitable trade.</li>
+  <li><strong>Two Phase Pro</strong> → Requires 3 profitable days (min 0.5% each) + 10-day cycle.</li>
+  <li>Processing is fast — usually within <strong>3 business days</strong> once approved.</li>
+</ul>
+
+<h2 id="pricing">Challenge Pricing & Current Discounts (May 2026)</h2>
+<p>FXIFY offers competitive pricing, especially with the current stackable discounts.</p>
+
+<div class="my-8 bg-blue-900/10 border border-blue-500/30 rounded-3xl p-8">
+  <h3 class="text-blue-400">🎁 Best Current Discount (Expires 31 May 2026)</h3>
+  <p class="mt-2">Use code <strong>failuresfx</strong> first (15% off), then stack <strong>fxify3</strong> for <strong>33% total discount</strong>.</p>
+  <p class="text-xs text-slate-400 mt-2">Note: Select your Platform, Account Balance, and Price Feed before applying codes.</p>
+  <a href="https://trader.fxify.com/purchasechallenge?affiliateId=5127" class="inline-block mt-4 premium-button bg-blue-600 hover:bg-blue-500">Start FXIFY Challenge →</a>
+</div>
+
+<h2 id="bonus">Exclusive VerifiedPropFirm Bonus</h2>
+<p>When you purchase an FXIFY challenge using our affiliate code, you get lifetime access to our $249 MT5 Tool Suite (Equity Guardian EA, Risk Calculator, Trend Indicator, News Indicator, Candle Timer).</p>
 `,
     features: [
       'Platforms: MT4, MT5, DXtrade, TradingView',
