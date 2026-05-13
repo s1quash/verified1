@@ -1,0 +1,87 @@
+---
+// src/components/RelatedPosts.astro
+// Beautiful, SEO-optimized related posts component for VerifiedPropFirm
+
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentSlug?: string;
+  currentTags?: string[];
+  limit?: number;
+  title?: string;
+  variant?: 'blog' | 'prop-firm';
+}
+
+const { 
+  currentSlug, 
+  currentTags = [], 
+  limit = 3,
+  title = "Continue Exploring",
+  variant = 'blog'
+} = Astro.props;
+
+const allPosts = await getCollection('blog');
+
+const relatedPosts = allPosts
+  .filter(post => post.id !== currentSlug)
+  .filter(post => {
+    if (currentTags.length === 0) return true;
+    return post.data.tags?.some((tag: string) => currentTags.includes(tag));
+  })
+  .sort(() => 0.5 - Math.random())
+  .slice(0, limit);
+---
+
+{relatedPosts.length > 0 && (
+  <section class="mt-16 pt-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-white">{title}</h2>
+          <p class="text-slate-400 mt-1 text-sm">More expert insights from the VerifiedPropFirm team</p>
+        </div>
+        <a 
+          href="/blog/" 
+          class="hidden md:inline-flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors group"
+        >
+          View All Insights 
+          <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {relatedPosts.map((post) => (
+          <a 
+            href={`/blog/${post.id}/`} 
+            class="group block bg-slate-900/60 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+          >
+            <div class="flex items-center gap-3 mb-5">
+              <span class="inline-block text-[10px] font-bold uppercase tracking-[1.5px] text-blue-400 bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-500/20">
+                {post.data.tags?.[0] || 'Insight'}
+              </span>
+              <time 
+                class="text-xs text-slate-500 font-medium" 
+                datetime={post.data.pubDate.toISOString().split('T')[0]}
+              >
+                {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </time>
+            </div>
+            
+            <h3 class="font-bold text-[21px] leading-tight tracking-[-0.015em] mb-4 text-white group-hover:text-blue-400 transition-colors line-clamp-3">
+              {post.data.title}
+            </h3>
+            
+            <p class="text-slate-400 text-[15px] leading-relaxed line-clamp-3 mb-6">
+              {post.data.description}
+            </p>
+            
+            <div class="flex items-center text-sm font-bold text-blue-400 group-hover:gap-2 transition-all">
+              Read full insight
+              <span class="ml-1 transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
