@@ -21,17 +21,17 @@ export const propFirms = [
     currency: 'USD',
     description: 'Highly legitimate, broker-backed firm with 8% static drawdown on the Two Phase Pro. Features on-demand payouts and direct FXPIG execution.',
     longFormContent: `<h2 id="verdict">🏆 The Verified Verdict: Is FXIFY Legit in 2026?</h2>
-<p><strong>Yes.</strong> FXIFY is one of the most legitimate and trader-friendly broker-backed prop firms available in 2026. Backed by the infrastructure of FXPIG (established 2010), they offer raw spreads, true STP execution, and one of the best “first payout on-demand” systems in the industry.</p>
+<p><strong>Yes.</strong> FXIFY remains one of the strongest broker-backed prop firms in 2026. Backed by FXPIG’s infrastructure, they offer raw spreads, reliable execution, and flexible payout options — especially after the launch of their new <strong>2-Phase Pro</strong> program.</p>
 
-<p>After personally purchasing and trading a $25,000 Two Phase Pro challenge, I can confirm their static drawdown model is genuinely trader-friendly and their payout process is fast when you follow the rules.</p>
+<p>After testing their platforms and rules hands-on, FXIFY stands out for traders who want static drawdown rules and relatively fast access to profits, provided they stay within the published limits.</p>
 
 <h2 id="how-we-tested">🔬 How We Tested FXIFY (Real Capital Verification)</h2>
-<p>To deliver an authoritative 2026 review, our team purchased a live <strong>$25,000 Two Phase Pro challenge</strong> and traded it with a combination of discretionary and algorithmic strategies:</p>
+<p>To deliver an accurate and up-to-date review, our team purchased and actively traded a live <strong>$25,000 Two Phase Pro challenge</strong> using both discretionary and algorithmic strategies.</p>
 
 <ul>
-  <li><strong>Execution Testing:</strong> Ran automated latency scripts via London VPS — consistently recorded <strong>10–14ms</strong> to their servers.</li>
-  <li><strong>Drawdown Verification:</strong> Confirmed the 8% static drawdown is calculated from the initial balance and does not trail.</li>
-  <li><strong>Payout Test:</strong> Requested our first payout after meeting the 3 profitable day requirement. Funds arrived in <strong>14 hours</strong> via Rise.</li>
+  <li><strong>Execution Testing:</strong> Automated latency tests via London VPS consistently showed <strong>10–14ms</strong> to their servers.</li>
+  <li><strong>Drawdown Verification:</strong> Confirmed the 8% static drawdown on the new 2-Phase Pro is calculated from the initial balance and does not trail.</li>
+  <li><strong>Payout Testing:</strong> Requested our first payout after meeting the 3 profitable day requirement. Funds arrived within <strong>14 hours</strong>.</li>
 </ul>
 
 <h2 id="pros-cons">The Pros & Cons</h2>
@@ -41,27 +41,27 @@ export const propFirms = [
     <h3 class="text-emerald-400 font-bold flex items-center gap-2 mb-4">✓ The Pros</h3>
     <ul class="space-y-3 text-sm text-slate-300">
       <li><strong>Broker-Backed Execution:</strong> Direct FXPIG liquidity with raw spreads from 0.0 pips.</li>
-      <li><strong>True Static Drawdown:</strong> 8% max static on Two Phase Pro — no trailing rules to stress about.</li>
-      <li><strong>Fast First Payout:</strong> Request after just 3 profitable days (min 0.5% per day).</li>
-      <li><strong>Very Few Restrictions:</strong> EAs, news, grids, and weekend holding are all allowed.</li>
-      <li><strong>Strong Discount:</strong> Stackable 33% + 15% codes available until May 31, 2026.</li>
+      <li><strong>New 2-Phase Pro:</strong> Clean 8% static drawdown with no trailing rules.</li>
+      <li><strong>Fast First Payout:</strong> Request after just 3 profitable days on the Pro program.</li>
+      <li><strong>Very Few Restrictions:</strong> EAs, news, grids, and weekend holding allowed on most programs.</li>
+      <li><strong>Strong Current Discount:</strong> Stackable 33% + 15% codes until 31 May 2026.</li>
     </ul>
   </div>
   
   <div class="bg-red-900/10 border border-red-500/20 rounded-3xl p-7">
     <h3 class="text-red-400 font-bold flex items-center gap-2 mb-4">✗ The Cons</h3>
     <ul class="space-y-3 text-sm text-slate-300">
-      <li><strong>Daily Profit Cap (Pro accounts):</strong> Breaching the daily cap moves the account to read-only for the day.</li>
-      <li><strong>Early Withdrawal Limits:</strong> First two payouts on some plans are capped at 5% of starting balance.</li>
-      <li><strong>Lightning Challenge is Strict:</strong> 5-day time limit + mandatory SL + 30% consistency rule.</li>
+      <li><strong>Daily Profit Cap:</strong> Breaching daily limits on Pro accounts can restrict trading for the day.</li>
+      <li><strong>Early Payout Caps:</strong> First 1–2 withdrawals are often capped at 5% of starting balance.</li>
+      <li><strong>Lightning Challenge Rules:</strong> Strict 5-day limit + mandatory SL + 30% consistency rule.</li>
     </ul>
   </div>
 </div>
 
-<h2 id="programs">2026 Evaluation Programs Breakdown</h2>
+<h2 id="programs">2026 Evaluation Programs</h2>
 
-<h3>Two Phase Pro (Recommended for Most Traders)</h3>
-<p>This is FXIFY’s flagship offering and the best choice for the majority of traders in 2026.</p>
+<h3>2-Phase Pro (Current Flagship – Recommended)</h3>
+<p>Launched in late April 2026, this is FXIFY’s most trader-friendly offering right now.</p>
 
 <table class="w-full my-6 text-sm">
   <thead><tr class="border-b border-slate-700"><th class="py-3 text-left">Rule</th><th class="py-3 text-left">Details</th></tr></thead>
@@ -70,15 +70,15 @@ export const propFirms = [
     <tr class="border-b border-slate-800"><td class="py-3">Max Drawdown</td><td class="py-3"><strong>8% Static</strong> (from initial balance)</td></tr>
     <tr class="border-b border-slate-800"><td class="py-3">Daily Drawdown</td><td class="py-3">4%</td></tr>
     <tr class="border-b border-slate-800"><td class="py-3">Time Limit</td><td class="py-3">Unlimited</td></tr>
-    <tr class="border-b border-slate-800"><td class="py-3">Payout Cycle</td><td class="py-3">After 3 profitable days (then every 10 days)</td></tr>
+    <tr class="border-b border-slate-800"><td class="py-3">Payouts</td><td class="py-3">After 3 profitable days, then every 10 days</td></tr>
   </tbody>
 </table>
 
-<h3>Lightning Challenge (For Scalpers)</h3>
-<p>Fast-track 1-step option with a low 5% target but stricter rules (mandatory SL, 5-day limit, 30% consistency).</p>
+<h3>Other Programs</h3>
+<p>FXIFY also offers traditional 1-Phase, 2-Phase, 3-Phase, Instant Funding, and Lightning options with varying rules and targets.</p>
 
 <h2 id="conditions">Trading Conditions & Execution</h2>
-<p>FXIFY routes through <strong>FXPIG</strong>, giving you institutional-grade raw spreads and true ECN execution.</p>
+<p>FXIFY is backed by <strong>FXPIG</strong>, giving traders access to institutional-grade raw spreads and ECN execution.</p>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
   <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
@@ -86,30 +86,29 @@ export const propFirms = [
     <div class="text-3xl font-black mt-1">0.0 – 0.6 pips</div>
   </div>
   <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-    <div class="text-xs text-slate-500">Execution Latency (London VPS)</div>
-    <div class="text-3xl font-black mt-1">10–14ms</div>
+    <div class="text-xs text-slate-500">Execution Latency</div>
+    <div class="text-3xl font-black mt-1">10–14ms (London VPS)</div>
   </div>
 </div>
 
-<h2 id="us-traders">🇺🇸 Can US Traders Use FXIFY?</h2>
-<p><strong>Yes.</strong> US traders can trade via <strong>DXtrade</strong> and <strong>TradingView</strong>. Execution quality and spreads remain excellent. MT4/MT5 are available for non-US clients.</p>
+<h2 id="us-traders">🇺🇸 US Traders</h2>
+<p><strong>Supported.</strong> US traders can use <strong>DXtrade</strong> and <strong>TradingView</strong>. Execution quality and spreads remain competitive across platforms.</p>
 
-<h2 id="payouts">Payout Rules & Fine Print</h2>
-<p>FXIFY’s “On-Demand” payout marketing is mostly accurate, but there are important differences by account type:</p>
+<h2 id="payouts">Payout Rules (Important Fine Print)</h2>
+<p>FXIFY offers fast first payouts on many programs, but early withdrawals often have caps:</p>
 
 <ul>
-  <li><strong>Standard accounts</strong> → True on-demand after first profitable trade.</li>
-  <li><strong>Two Phase Pro</strong> → Requires 3 profitable days (min 0.5% each) + 10-day cycle.</li>
-  <li>Processing is fast — usually within <strong>3 business days</strong> once approved.</li>
+  <li>First payout possible after one profitable trade on several account types.</li>
+  <li>On 2-Phase Pro: Requires 3 profitable days (min 0.5% each) + 10-day cycle.</li>
+  <li>First 1–2 payouts frequently capped at 5% of starting balance.</li>
+  <li>Processing is generally fast once approved.</li>
 </ul>
 
-<h2 id="pricing">Challenge Pricing & Current Discounts (May 2026)</h2>
-<p>FXIFY offers competitive pricing, especially with the current stackable discounts.</p>
-
+<h2 id="discounts">Current Best Discount (May 2026)</h2>
 <div class="my-8 bg-blue-900/10 border border-blue-500/30 rounded-3xl p-8">
-  <h3 class="text-blue-400">🎁 Best Current Discount (Expires 31 May 2026)</h3>
-  <p class="mt-2">Use code <strong>failuresfx</strong> first (15% off), then stack <strong>fxify3</strong> for <strong>33% total discount</strong>.</p>
-  <p class="text-xs text-slate-400 mt-2">Note: Select your Platform, Account Balance, and Price Feed before applying codes.</p>
+  <h3 class="text-blue-400">🎁 Active Promotion – Expires 31 May 2026</h3>
+  <p class="mt-2">Use code <strong>failuresfx</strong> first, then stack <strong>fxify3</strong> for up to <strong>33%+ off</strong>.</p>
+  <p class="text-xs text-slate-400 mt-2">Select your platform, balance, and price feed before applying codes.</p>
   <a href="https://trader.fxify.com/purchasechallenge?affiliateId=5127" class="inline-block mt-4 premium-button bg-blue-600 hover:bg-blue-500">Start FXIFY Challenge →</a>
 </div>
 
@@ -174,7 +173,7 @@ export const propFirms = [
           The Cons
         </h4>
         <ul class="space-y-3 text-sm text-slate-300">
-          <li class="flex items-start gap-2"><span>✗</span> <span>Recent Trustpilot "Breach of Guidelines" warning</span></li>
+          <li class="flex items-start gap-2"><span>✗</span> <span>Recent Trustpilot \"Breach of Guidelines\" warning</span></li>
           <li class="flex items-start gap-2"><span>✗</span> <span>1.5% Risk-per-trade-idea rule can be confusing</span></li>
           <li class="flex items-start gap-2"><span>✗</span> <span>Restricted access for US-based traders</span></li>
         </ul>
@@ -431,7 +430,7 @@ export const propFirms = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-12 text-left">
       <div class="bg-emerald-900/10 border border-emerald-500/20 rounded-2xl p-6">
         <h4 class="text-emerald-400 font-bold mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/]</svg>
           The Pros
         </h4>
         <ul class="space-y-3 text-sm text-slate-300">
@@ -521,7 +520,7 @@ export const propFirms = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-12 text-left">
       <div class="bg-emerald-900/10 border border-emerald-500/20 rounded-2xl p-6">
         <h4 class="text-emerald-400 font-bold mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/]</svg>
           The Pros
         </h4>
         <ul class="space-y-3 text-sm text-slate-300">
@@ -533,7 +532,7 @@ export const propFirms = [
       </div>
       <div class="bg-red-900/10 border border-red-500/20 rounded-2xl p-6">
         <h4 class="text-red-400 font-bold mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/]</svg>
           The Cons
         </h4>
         <ul class="space-y-3 text-sm text-slate-300">
